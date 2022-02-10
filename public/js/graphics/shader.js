@@ -57,4 +57,9 @@ class Shader {
   unbind() {
     gl.useProgram(null);
   }
+
+  setMatrix(variableName, value) {
+    const location = gl.getUniformLocation(this.program, variableName);
+    gl.uniformMatrix4fv(location, gl.FALSE, value);
+  }
 }
