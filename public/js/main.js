@@ -8,6 +8,10 @@ const mat4 = glMatrix.mat4;
 
 // FUNCTIONS
 
+const randint = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
 const startDemo = async () => {
 
   const loader = new Loader();
@@ -19,11 +23,24 @@ const startDemo = async () => {
     [0, 0, 10],
     [0, 0, 0],
     [0, 1, 0]);
-  const entities = [new Entity(
-    [0, 0, 0],
-    [0, 0, 0],
-    [1, 1, 1]
-  )];
+  const entities = [];
+
+  // CUBE GENERATION ALGORITHM
+
+  const xzMargin = 10;
+  const yMargin = 3;
+
+  for (let z = -10; z < 10; z++) {
+    for (let x = -10; x < 10; x++) {
+      for (let y = 0; y < randint(1, 5); y++) {
+        entities.push(new Entity(
+          [x * xzMargin, y * yMargin, z * xzMargin],
+          [0, 0, 0],
+          [1, 1, 1]
+        ));
+      }
+    }
+  }
 
   const loop = () => {
 
@@ -36,8 +53,7 @@ const startDemo = async () => {
     cubeShader.bind();
     cubeShader.setMatrix('proj', renderer.getProj());
     cubeShader.setMatrix('view', camera.getView());
-    cubeShader.setVec3('cameraDirection', camera.direction);
-
+    cubeShader.setVec3('cameraPosition', camera.position);
     loader.loadCube(cubeShader);
     renderer.renderEntities(cubeShader, cube, entities);
     cubeShader.unbind();

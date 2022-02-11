@@ -21,7 +21,7 @@ uniform mat4 model;
 
 void transformVectors()
 {
-  fPosition = (model * vec4(vPosition, 0.0)).xyz;
+  fPosition = (model * vec4(vPosition, 1.0)).xyz;
   fNormal = (model * vec4(vNormal, 0.0)).xyz;
 }
 
