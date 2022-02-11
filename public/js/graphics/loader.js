@@ -1,5 +1,5 @@
 
-/* Used to load all buffers through the WebGL API... */
+/* Used to load different models through the WebGL API... */
 
 class Loader {
 
@@ -12,19 +12,25 @@ class Loader {
     });
   }
 
-  loadModel(shader, positions, colors, indices) {
-    this.loadAttribute(shader, 'vPosition', 2, positions);
-    this.loadAttribute(shader, 'vColor', 3, colors);
-    this.loadIndices(indices);
+  loadTriangle(shader) {
+    this.loadAttribute(shader, 'vPosition', 2, triangle.positions, false);
+    this.loadAttribute(shader, 'vColor', 3, triangle.colors, false);
+    this.loadIndices(triangle.indices);
   }
 
-  loadAttribute(shader, attributeNameInShader, vertexSize, data) {
+  loadCube(shader) {
+    this.loadAttribute(shader, 'vPosition', 3, cube.positions, false);
+    this.loadAttribute(shader, 'vNormal', 3, cube.normals, true);
+    this.loadIndices(cube.indices);
+  }
+
+  loadAttribute(shader, attributeNameInShader, vertexSize, data, normalized) {
     const vbo = gl.createBuffer();
     const location = gl.getAttribLocation(shader.program, attributeNameInShader);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
-    gl.vertexAttribPointer(location, vertexSize, gl.FLOAT, false, vertexSize * Float32Array.BYTES_PER_ELEMENT, 0);
+    gl.vertexAttribPointer(location, vertexSize, gl.FLOAT, normalized, vertexSize * Float32Array.BYTES_PER_ELEMENT, 0);
     gl.enableVertexAttribArray(location);
   }
 

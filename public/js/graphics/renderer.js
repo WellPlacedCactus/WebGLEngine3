@@ -13,12 +13,16 @@ class Renderer {
   prepareFrame() {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.enable(gl.DEPTH_TEST);
+    gl.enable(gl.CULL_FACE);
+    gl.frontFace(gl.CCW);
+    gl.cullFace(gl.BACK);
   }
 
-  renderEntities(shader, entities) {
+  renderEntities(shader, primativeDataStructure, entities) {
     entities.forEach(entity => {
       shader.setMatrix('model', entity.getModel());
-      gl.drawElements(gl.TRIANGLES, triangle.indices.length, gl.UNSIGNED_SHORT, 0);
+      gl.drawElements(gl.TRIANGLES, primativeDataStructure.indices.length, gl.UNSIGNED_SHORT, 0);
     });
   }
 
