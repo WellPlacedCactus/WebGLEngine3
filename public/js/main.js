@@ -47,9 +47,11 @@ const startDemo = async () => {
     // prepare the frame
     renderer.prepareFrame();
 
-    // render the cube
-    entities[0].rotation[0] += 0.01;
-    entities[0].rotation[1] += 0.01;
+    // entities.forEach(entity => {
+    //   entity.rotation[0] += Math.random() * 0.01;
+    //   entity.rotation[1] += Math.random() * 0.01;
+    // });
+
     cubeShader.bind();
     cubeShader.setMatrix('proj', renderer.getProj());
     cubeShader.setMatrix('view', camera.getView());

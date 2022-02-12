@@ -23,5 +23,5 @@ float getPointLight()
 
 void main()
 {
-  gl_FragColor = vec4(vec3(0.1, 0.9, 0.9) * getPointLight(), 1.0);
+  gl_FragColor = vec4(vec3(1.0, 1.0, 1.0) * getPointLight(), 1.0);
 }
