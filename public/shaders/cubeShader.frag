@@ -16,7 +16,7 @@ float getPointLight()
 {
   vec3 normal = normalize(fNormal);
   vec3 sunDirection = normalize(cameraPosition - fPosition);
-  return dot(normal, sunDirection);
+  return dot(normal, sunDirection) + 0.1;
 }
 
 // MAIN

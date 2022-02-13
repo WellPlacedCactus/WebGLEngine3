@@ -15,6 +15,7 @@ class Loader {
   loadTriangle(shader) {
     this.loadAttribute(shader, 'vPosition', 2, triangle.positions, false);
     this.loadAttribute(shader, 'vColor', 3, triangle.colors, false);
+    this.loadAttribute(shader, 'vNormal', 3, triangle.normals, true);
     this.loadIndices(triangle.indices);
   }
 

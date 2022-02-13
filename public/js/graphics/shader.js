@@ -3,7 +3,14 @@
 
 class Shader {
 
-  constructor(vsSource, fsSource) {
+  constructor(vsPath, fsPath) {
+    this.load(vsPath, fsPath);
+  }
+
+  async load(vsPath, fsPath) {
+    const loader = new Loader();
+    const vsSource = await loader.loadTextFromFile(vsPath);
+    const fsSource = await loader.loadTextFromFile(fsPath);
     const vs = this.createShader(gl.VERTEX_SHADER, 'vertex', vsSource);
     const fs = this.createShader(gl.FRAGMENT_SHADER, 'fragment', fsSource);
     this.program = this.createProgram(vs, fs);

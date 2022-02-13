@@ -7,7 +7,7 @@ class Camera {
     this.position = position;
     this.direction = direction;
     this.up = up;
-    this.theta = 0;
+    this.theta = Math.PI / 2 * 3;
   }
 
   getView() {
